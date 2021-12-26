@@ -13,7 +13,7 @@ namespace Presentation.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ICategoriesService categoriesService;
+        private IFileTransferService fileTransfService;
 
         public HomeController(ILogger<HomeController> logger)
         {

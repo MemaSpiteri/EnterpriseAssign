@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain.Models
 {
-    public class FileTransLogs
+    public class FileTransfers
     {
         public int Id { get; set; }
         public string EmailTo { get; set; }

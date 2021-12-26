@@ -13,7 +13,7 @@ namespace DataAccess.Context
           base(options)
         { }
 
-        public DbSet<FileTransLogs> Categories { get; set; }
+        public DbSet<FileTransfers> FileTransfers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

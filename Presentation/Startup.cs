@@ -33,7 +33,7 @@ namespace Presentation
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<BloggingContext>(options =>
+            services.AddDbContext<FileTransferContext>(options =>
            options.UseSqlServer(
                Configuration.GetConnectionString("DefaultConnection")));
 
@@ -42,7 +42,7 @@ namespace Presentation
             //        Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<BloggingContext>();
+                .AddEntityFrameworkStores<FileTransferContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
@@ -53,11 +53,8 @@ namespace Presentation
              //         > e.g. user opens the Index method and the index method makes two calls for the same repository
              //                class. result: 1 instance of the repository class is created
 
-            services.AddScoped<IBlogsService, BlogsService>();
-            services.AddScoped<IBlogsRepository, BlogsRepositories>();
-
-            services.AddScoped<ICategoriesService, CategoriesService>();
-            services.AddScoped<ICategoriesRepository, CategoriesRepository>();
+            services.AddScoped<IFileTransferService, FileTransferService>();
+            services.AddScoped<IFileTransferRepository, FileTransferRepository>();
 
         }
 
