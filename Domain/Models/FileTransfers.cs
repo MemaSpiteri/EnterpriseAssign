@@ -12,5 +12,7 @@ namespace Domain.Models
         public string Title { get; set; }
         public string Message { get; set; }
         public string Password { get; set; }
+        public string File { get; set; }
+        public string Link { get; set; }
     }
 }

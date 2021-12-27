@@ -29,6 +29,12 @@ namespace DataAccess.Migrations
                     b.Property<string>("EmailTo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Message")
                         .HasColumnType("nvarchar(max)");
 

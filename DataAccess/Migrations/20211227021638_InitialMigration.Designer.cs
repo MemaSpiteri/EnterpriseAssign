@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(FileTransferContext))]
-    [Migration("20211226201732_InitialMigration")]
+    [Migration("20211227021638_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,12 @@ namespace DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("EmailTo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("File")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")

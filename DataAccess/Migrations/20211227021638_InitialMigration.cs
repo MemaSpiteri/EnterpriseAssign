@@ -8,6 +8,7 @@ namespace DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
+
             migrationBuilder.CreateTable(
                 name: "FileTransfers",
                 columns: table => new
@@ -18,12 +19,15 @@ namespace DataAccess.Migrations
                     YourEmail = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
+                    Password = table.Column<string>(nullable: true),
+                    File = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FileTransfers", x => x.Id);
                 });
         }
+
     }
 }
