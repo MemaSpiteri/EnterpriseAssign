@@ -75,7 +75,7 @@ namespace Presentation.Controllers
                     {
                         var resStr = client.UploadFile("https://file.io", @absolutePathWithFilename);
                         var jObjResult = JObject.Parse(Encoding.UTF8.GetString(resStr));
-                        var linkToFile = jObjResult["link"];
+                        model.Link = (string)jObjResult["link"];
                     }
 
                     }

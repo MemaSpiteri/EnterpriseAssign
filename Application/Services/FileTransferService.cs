@@ -26,7 +26,8 @@ namespace Application.Services
                     Title = model.Title,
                     File = model.File,
                     Message = model.Message,
-                    Password = model.Password
+                    Password = model.Password,
+                    Link = model.Link
                 });
 
             RestClient client = new RestClient();
