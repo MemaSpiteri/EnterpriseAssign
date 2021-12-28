@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Application.Services
 {
-    public class LogInDbService
+    public class LogInFileService
     {
     }
 }

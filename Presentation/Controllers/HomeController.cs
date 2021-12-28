@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,14 @@ namespace Presentation.Controllers
             _logger = logger;
         }
 
-       
+        [Authorize]
+        public IActionResult List()
+        {
+            var list = fileTransfService.GetFileTransfer();
+
+            return View(list);
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -80,16 +88,5 @@ namespace Presentation.Controllers
             return View();
         }
 
-        
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

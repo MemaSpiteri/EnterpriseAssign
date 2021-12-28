@@ -9,6 +9,7 @@ using RestSharp.Authenticators;
 using System.IO;
 using MailChimp.Net.Models;
 using Method = RestSharp.Method;
+using System.Linq;
 
 namespace Application.Services
 {
@@ -36,6 +37,8 @@ namespace Application.Services
             SendSimpleMessage(model);
         }
 
+
+       
 
         public static IRestResponse SendSimpleMessage(FileTransfers model)
         {
@@ -71,6 +74,21 @@ namespace Application.Services
         //    }
 
         //}
+
+        public IQueryable<FileTransfers> GetFileTransfer()
+        {
+            //all this will be changed into 1 line with the introduction of AutoMapper
+
+            var list = from b in FileTransRepo.GetFileTransfer() //List<Blog>
+                       select new FileTransfers()
+                       {
+                          Id = b.Id,
+                          EmailTo = b.EmailTo,
+                          YourEmail = b.YourEmail,
+                          Title =b.Title
+                       };
+            return list;
+        }
     }
     
 }

@@ -25,19 +25,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                                Blogs
+                            <a class="nav-link dropdown-toggle" href="/Home/List" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                All Transfers
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/Blogs/Create">Create</a>
-                                <a class="dropdown-item" href="/Blogs/Index">List</a>
+                                <a class="dropdown-item" href="/Home/List">List</a>
                             </div>
                         </li>
-
+                        }
                     </ul>
                 </div>
+                        
             </div>
         </nav>
     </header>
