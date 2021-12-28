@@ -4,7 +4,19 @@
     ViewData["Title"] = "File Transfer";
 }
 
-<h1>File Transfer</h1>
+<h2>File Transfer</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+<div class="alert alert-success" role="alert">
+    @ViewBag.Message
+</div>}
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+<div class="alert alert-danger" role="alert">
+    @ViewBag.Error
+</div>}
 
 <hr />
 <div class="row">
@@ -39,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="File" class="form-label" for="customFile">File</label>
-                <input type="file" asp-for="File" class="form-control-file"  name="file"/>
+                <input type="file" asp-for="File" class="form-control-file" name="file" />
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <br />
@@ -51,5 +63,5 @@
 </div>
 
 @*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

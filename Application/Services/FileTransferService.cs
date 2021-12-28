@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Text;
 using RestSharp;
 using RestSharp.Authenticators;
+using System.IO;
+using MailChimp.Net.Models;
+using Method = RestSharp.Method;
 
 namespace Application.Services
 {
@@ -30,8 +33,14 @@ namespace Application.Services
                     Link = model.Link
                 });
 
+            SendSimpleMessage(model);
+        }
+
+
+        public static IRestResponse SendSimpleMessage(FileTransfers model)
+        {
             RestClient client = new RestClient();
-            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
+            client.BaseUrl = new Uri("https://api.eu.mailgun.net/v3");
             client.Authenticator =
                 new HttpBasicAuthenticator("api",
                                             "a5539f015f58d7cac1056d5a0867a2c9-cac494aa-46269f71");
@@ -40,12 +49,28 @@ namespace Application.Services
             request.Resource = "{domain}/messages";
             request.AddParameter("from", model.YourEmail);
             request.AddParameter("to", model.EmailTo);
-            request.AddParameter("to", "mema.spiteri@gmail.com");
             request.AddParameter("subject", model.Title);
-            request.AddParameter("text", model.Message);
+            request.AddParameter("text", model.Link);
             request.Method = Method.POST;
             client.Execute(request);
+            return client.Execute(request);
         }
+
+        //public void zipFileWithPass()
+        //{
+        //    using (FileStream zipFile = File.Open("compress_directory.zip", FileMode.Create))
+        //    {
+        //        using (Archive archive = new Archive(new ArchiveEntrySettings(null, new TraditionalEncryptionSettings("p@s$"))))
+        //        {
+        //            // Add folder to the archive
+        //            DirectoryInfo corpus = new DirectoryInfo("CanterburyCorpus");
+        //            archive.CreateEntries(corpus);
+        //            // Create ZIP archive
+        //            archive.Save(zipFile);
+        //        }
+        //    }
+
+        //}
     }
     
 }

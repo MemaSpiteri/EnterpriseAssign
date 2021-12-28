@@ -50,12 +50,8 @@ namespace Presentation.Controllers
                         string newFilename = Guid.NewGuid() + Path.GetExtension(file.FileName);
                         _logger.Log(LogLevel.Information, $"New filename {newFilename} was generated for the file being uploaded by user {User.Identity.Name}");
                         //2. find what the absolute path to the folder Files is
-                        //C:\Users\attar\Source\Repos\SWD62BEP2021v2\Presentation\Files\5389205C-813B-4AFA-A453-B912C30BF933.jpg
 
-                        //hostEnv.ContentRootPath : C:\Users\attar\Source\Repos\SWD62BEP2021v2\Presentation
-                        //hostEnv.WebRootPath:  C:\Users\attar\Source\Repos\SWD62BEP2021v2\Presentation\wwwroot
-
-                        string absolutePath = hostEnv.WebRootPath + "\\Files";
+                        string absolutePath = hostEnv.ContentRootPath + "\\Files";
                         _logger.Log(LogLevel.Information, $"{User.Identity.Name} is about to start saving file at {absolutePath}");
 
                         string absolutePathWithFilename = absolutePath + "\\" + newFilename;
@@ -69,23 +65,17 @@ namespace Presentation.Controllers
                         }
                         _logger.Log(LogLevel.Information, $"{newFilename} has been saved successfully at {absolutePath}");
 
-                   
-
-                    using (WebClient client = new WebClient())
-                    {
-                        var resStr = client.UploadFile("https://file.io", @absolutePathWithFilename);
-                        var jObjResult = JObject.Parse(Encoding.UTF8.GetString(resStr));
-                        model.Link = (string)jObjResult["link"];
+                        //creates a link for the file upload
+                        model.Link = "localhost:44329/" + model.File;
+                        
+                        fileTransfService.AddFile(model);
+                        ViewBag.Message = "Email sent successfully";
                     }
-
-                    }
-                    fileTransfService.AddFile(model);
-                    ViewBag.Message = "File added successfully";
                 }
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Blog wasn't added successfully";
+                ViewBag.Error = "Email wasn't sent..";
             }
             return View();
         }
