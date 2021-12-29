@@ -12,6 +12,7 @@ using Method = RestSharp.Method;
 using System.Linq;
 using Application.ViewModel;
 using Microsoft.Azure.Documents;
+using System.Net;
 
 namespace Application.Services
 {
@@ -25,6 +26,7 @@ namespace Application.Services
         }
         public void AddFile(FileTransfers model)
         {
+           
             FileTransRepo.AddFile(
                 new FileTransfers()
                 {
@@ -42,7 +44,7 @@ namespace Application.Services
         public static IRestResponse SendSimpleMessage(FileTransfers model)
         {
             RestClient client = new RestClient();
-            client.BaseUrl = new Uri("https://api.eu.mailgun.net/v3");
+            client.BaseUrl = new Uri("https://api.eu.mailgun.net/v3/sandbox730d7935b7284b36bcba9ae4c0817bb9.mailgun.org");
             client.Authenticator =
                 new HttpBasicAuthenticator("api",
                                             "a5539f015f58d7cac1056d5a0867a2c9-cac494aa-46269f71");
@@ -52,7 +54,7 @@ namespace Application.Services
             request.AddParameter("from", model.YourEmail);
             request.AddParameter("to", model.EmailTo);
             request.AddParameter("subject", model.Title);
-            request.AddParameter("text", model.Link);
+            request.AddParameter("text", model.File);
             request.Method = Method.POST;
             client.Execute(request);
             return client.Execute(request);

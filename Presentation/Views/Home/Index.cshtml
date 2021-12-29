@@ -4,7 +4,7 @@
     ViewData["Title"] = "File Transfer";
 }
 
-<h2>File Transfer</h2>
+<h2 style="color: cornflowerblue; font-family: 'Courier New'" class="font-weight-bold">File Transfer</h2>
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))
 {
@@ -20,43 +20,43 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="border:2px">
         <form asp-action="Index" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
-                <label asp-for="EmailTo" class="control-label">Email To:</label>
+                <label asp-for="EmailTo" class="control-label font-weight-bold" style="font-family: 'Courier New'">Email To:</label>
                 <input asp-for="EmailTo" class="form-control" />
                 <span asp-validation-for="EmailTo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="YourEmail" class="control-label">Your Email:</label>
+                <label asp-for="YourEmail" class="control-label font-weight-bold"  style="font-family: 'Courier New'">Your Email:</label>
                 <input asp-for="YourEmail" class="form-control" />
                 <span asp-validation-for="YourEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Title</label>
+                <label asp-for="Title" class="control-label font-weight-bold"  style="font-family: 'Courier New'">Title:</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Message" class="control-label">Message</label>
-                <input asp-for="Message" class="form-control" />
+                <label asp-for="Message" class="control-label font-weight-bold"  style="font-family: 'Courier New'">Message:</label>
+                <input asp-for="Message" class="form-control" style="height:200px; width:550px" />
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label">Password</label>
+                <label asp-for="Password" class="control-label font-weight-bold"  style="font-family: 'Courier New'">Password:</label>
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="File" class="form-label" for="customFile">File</label>
+                <label asp-for="File" class="form-label font-weight-bold" for="customFile"  style="font-family: 'Courier New'">File:</label>
                 <input type="file" asp-for="File" class="form-control-file" name="file" />
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Get a link" class="btn btn-primary" />
+                <input type="submit" value="Send Email" class="btn btn-info"  style="font-family: 'Courier New'" />
             </div>
         </form>
     </div>
