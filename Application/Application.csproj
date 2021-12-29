@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\ILogInDbService.cs" />
+    <Compile Remove="Services\LogInDbService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailChimp.Net.V3" Version="5.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.20" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.20" />

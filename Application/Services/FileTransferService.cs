@@ -19,10 +19,9 @@ namespace Application.Services
     {
         private IFileTransferRepository FileTransRepo;
        
-        public FileTransferService(IFileTransferRepository _FileTransRepo, Logs logger)
+        public FileTransferService(IFileTransferRepository _FileTransRepo)
         {
             FileTransRepo = _FileTransRepo;
-            _logger = logger;
         }
         public void AddFile(FileTransfers model)
         {
@@ -37,10 +36,6 @@ namespace Application.Services
                     Password = model.Password,
                     Link = model.Link
                 });
-
-            
-            
-
             SendSimpleMessage(model);
         }
 

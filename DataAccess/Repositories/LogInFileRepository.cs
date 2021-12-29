@@ -9,9 +9,9 @@ namespace DataAccess.Repositories
 {
     public class LogInFileRepository : ILog
     {
-        private LogContext context;
+        private FileTransferContext context;
 
-        public LogInFileRepository(LogContext _context)
+        public LogInFileRepository(FileTransferContext _context)
         {
             context = _context;
         }

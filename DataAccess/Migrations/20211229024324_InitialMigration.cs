@@ -66,6 +66,24 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmailTo = table.Column<string>(nullable: true),
+                    YourEmail = table.Column<string>(nullable: true),
+                    FileLoc = table.Column<string>(nullable: true),
+                    FileName = table.Column<string>(nullable: true),
+                    DateSent = table.Column<DateTime>(nullable: false),
+                    FileSize = table.Column<float>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -230,6 +248,9 @@ namespace DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "FileTransfers");
+
+            migrationBuilder.DropTable(
+                name: "Logs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

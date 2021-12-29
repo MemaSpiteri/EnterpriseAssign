@@ -52,6 +52,36 @@ namespace DataAccess.Migrations
                     b.ToTable("FileTransfers");
                 });
 
+            modelBuilder.Entity("Domain.Models.Logs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateSent")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailTo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileLoc")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("FileSize")
+                        .HasColumnType("real");
+
+                    b.Property<string>("YourEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Logs");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

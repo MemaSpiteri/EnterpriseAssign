@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.Services;
+using DataAccess.Repositories;
+using Domain.Interfaces;
 using Domain.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -23,18 +25,18 @@ namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
-        private Logs _logger;
+        
         private IFileTransferService fileTransfService;
-        private ILogInDbService LogInDbService;
+        private ILog LogInDbService;
         private IWebHostEnvironment hostEnv;
 
-        public HomeController(Logs logger,  IFileTransferService _FileTransferService, ILogInDbService _LogDb,
+        public HomeController(IFileTransferService _FileTransferService, ILog _LogDb,
             IWebHostEnvironment _hostEnv)
         {
             fileTransfService = _FileTransferService;
             LogInDbService = _LogDb;
             hostEnv = _hostEnv;
-            _logger = logger;
+            
         }
 
         [Authorize]
@@ -60,11 +62,12 @@ namespace Presentation.Controllers
                 {
                     if (file != null)
                     {
+                        Logs _logger = new Logs();
                         _logger.DateSent = DateTime.Now;
 
                         //1. to generate a new unique filename
                         string newFilename = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        _logger.YourEmail = User.Identity.Name;
+                        _logger.YourEmail = model.YourEmail;
                         _logger.FileName = newFilename;
 
                         string absolutePath = hostEnv.ContentRootPath + "\\Files";
@@ -79,11 +82,11 @@ namespace Presentation.Controllers
                             file.CopyTo(fs);
                             fs.Close();
                         }
-                        _logger.fileSize = file.Length;
+                        _logger.FileSize = file.Length;
 
                         //creates a link for the file upload
                         model.Link = "localhost:44329/" + model.File;
-                        
+                        _logger.EmailTo = model.EmailTo;
                         fileTransfService.AddFile(model);
                         LogInDbService.AddLog(_logger);
                         ViewBag.Message = "Email sent successfully";

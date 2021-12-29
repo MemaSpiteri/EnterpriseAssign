@@ -9,16 +9,16 @@ namespace DataAccess.Repositories
 {
     public class LogInDbRepository : ILog
     {
-        private LogContext context;
+        private FileTransferContext context;
 
-        public LogInDbRepository(LogContext _context)
+        public LogInDbRepository(FileTransferContext _context)
         {
             context = _context;
         }
 
         public void AddLog(Logs b)
         {
-            context.logs.Add(b);
+            context.Logs.Add(b);
             context.SaveChanges();
         }
     }

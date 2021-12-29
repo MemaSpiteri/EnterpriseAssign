@@ -14,6 +14,7 @@ namespace DataAccess.Context
         { }
 
         public DbSet<FileTransfers> FileTransfers { get; set; }
+        public DbSet<Logs> Logs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

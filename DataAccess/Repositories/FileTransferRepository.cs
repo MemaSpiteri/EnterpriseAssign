@@ -2,7 +2,6 @@
 using DataAccess.Context;
 using Domain.Interfaces;
 using Domain.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Azure.Documents;
