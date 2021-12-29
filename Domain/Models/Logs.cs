@@ -4,13 +4,14 @@ using System.Text;
 
 namespace Domain.Models
 {
-    public class Log
+    public class Logs
     {
         public int Id { get; set; }
-        public string emailTo { get; set; }
+        public string EmailTo { get; set; }
         public string YourEmail { get; set; }
-        public string message { get; set; }
+        public string FileLoc { get; set; }
+        public string FileName { get; set; }
         public DateTime DateSent { get; set; }
-
+        public float FileSize { get; set; }
     }
 }

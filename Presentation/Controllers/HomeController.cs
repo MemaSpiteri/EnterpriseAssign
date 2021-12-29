@@ -7,10 +7,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
+using Application.Services;
 using Domain.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -20,14 +23,16 @@ namespace Presentation.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private Logs _logger;
         private IFileTransferService fileTransfService;
+        private ILogInDbService LogInDbService;
         private IWebHostEnvironment hostEnv;
 
-        public HomeController(ILogger<HomeController> logger,  IFileTransferService _FileTransferService,
+        public HomeController(Logs logger,  IFileTransferService _FileTransferService, ILogInDbService _LogDb,
             IWebHostEnvironment _hostEnv)
         {
             fileTransfService = _FileTransferService;
+            LogInDbService = _LogDb;
             hostEnv = _hostEnv;
             _logger = logger;
         }
@@ -35,7 +40,8 @@ namespace Presentation.Controllers
         [Authorize]
         public IActionResult List()
         {
-            var list = fileTransfService.GetFileTransfer();
+            var currentUser = this.User.Identity.Name; /* ToString();*/
+            var list = fileTransfService.GetFileTransfer(currentUser);
 
             return View(list);
         }
@@ -54,29 +60,32 @@ namespace Presentation.Controllers
                 {
                     if (file != null)
                     {
+                        _logger.DateSent = DateTime.Now;
+
                         //1. to generate a new unique filename
                         string newFilename = Guid.NewGuid() + Path.GetExtension(file.FileName);
-                        _logger.Log(LogLevel.Information, $"New filename {newFilename} was generated for the file being uploaded by user {User.Identity.Name}");
-                        //2. find what the absolute path to the folder Files is
+                        _logger.YourEmail = User.Identity.Name;
+                        _logger.FileName = newFilename;
 
                         string absolutePath = hostEnv.ContentRootPath + "\\Files";
-                        _logger.Log(LogLevel.Information, $"{User.Identity.Name} is about to start saving file at {absolutePath}");
 
                         string absolutePathWithFilename = absolutePath + "\\" + newFilename;
                         model.File = "\\Files\\" + newFilename;
                         //3. do the transfer/saving of the actual physical file
+                        _logger.FileLoc = model.File;
 
                         using (FileStream fs = new FileStream(absolutePathWithFilename, FileMode.CreateNew, FileAccess.Write))
                         {
                             file.CopyTo(fs);
                             fs.Close();
                         }
-                        _logger.Log(LogLevel.Information, $"{newFilename} has been saved successfully at {absolutePath}");
+                        _logger.fileSize = file.Length;
 
                         //creates a link for the file upload
                         model.Link = "localhost:44329/" + model.File;
                         
                         fileTransfService.AddFile(model);
+                        LogInDbService.AddLog(_logger);
                         ViewBag.Message = "Email sent successfully";
                     }
                 }

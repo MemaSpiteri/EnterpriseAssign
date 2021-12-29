@@ -10,15 +10,19 @@ using System.IO;
 using MailChimp.Net.Models;
 using Method = RestSharp.Method;
 using System.Linq;
+using Application.ViewModel;
+using Microsoft.Azure.Documents;
 
 namespace Application.Services
 {
     public class FileTransferService : IFileTransferService
     {
         private IFileTransferRepository FileTransRepo;
-        public FileTransferService(IFileTransferRepository _FileTransRepo)
+       
+        public FileTransferService(IFileTransferRepository _FileTransRepo, Logs logger)
         {
             FileTransRepo = _FileTransRepo;
+            _logger = logger;
         }
         public void AddFile(FileTransfers model)
         {
@@ -34,11 +38,11 @@ namespace Application.Services
                     Link = model.Link
                 });
 
+            
+            
+
             SendSimpleMessage(model);
         }
-
-
-       
 
         public static IRestResponse SendSimpleMessage(FileTransfers model)
         {
@@ -75,17 +79,19 @@ namespace Application.Services
 
         //}
 
-        public IQueryable<FileTransfers> GetFileTransfer()
+        public IQueryable<FileTransferViewModel> GetFileTransfer(string user)
         {
             //all this will be changed into 1 line with the introduction of AutoMapper
 
-            var list = from b in FileTransRepo.GetFileTransfer() //List<Blog>
-                       select new FileTransfers()
+            var list = from b in FileTransRepo.GetFileTransfer(user) //List<Blog>
+                       select new FileTransferViewModel()
                        {
                           Id = b.Id,
                           EmailTo = b.EmailTo,
                           YourEmail = b.YourEmail,
-                          Title =b.Title
+                          Title = b.Title,
+                          Message = b.Message,
+                          Link = b.Link
                        };
             return list;
         }

@@ -1,6 +1,11 @@
-﻿using DataAccess.Context;
+﻿using Application.ViewModel;
+using DataAccess.Context;
 using Domain.Interfaces;
 using Domain.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Azure.Documents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,13 +27,10 @@ namespace DataAccess.Repositories
             context.SaveChanges();
         }
 
-        public IQueryable<FileTransfers> GetFileTransfer()
+        public IQueryable<FileTransfers> GetFileTransfer(string user)
         {
-            return context.FileTransfers;
-
-            //var list = from b in context.Blogs
-            //           select b;
-            //return list;
+            var result = context.FileTransfers.Where(b => b.EmailTo == user || b.YourEmail == user);
+            return result;
         }
     }
 }

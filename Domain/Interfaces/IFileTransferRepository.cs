@@ -10,6 +10,6 @@ namespace Domain.Interfaces
     {
         public void AddFile(FileTransfers b);
 
-        public IQueryable<FileTransfers> GetFileTransfer();
+        public IQueryable<FileTransfers> GetFileTransfer(string user);
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using Application.ViewModel;
+using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Application.Interfaces
     {
         public void AddFile(FileTransfers model);
 
-        public IQueryable<FileTransfers> GetFileTransfer();
+        public IQueryable<FileTransferViewModel> GetFileTransfer(string user);
     }
 }

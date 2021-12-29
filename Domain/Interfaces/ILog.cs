@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Interfaces
+namespace Domain.Interfaces
 {
-    public interface ILogInDbService
+    public interface ILog
     {
-        public void AddLog(Logs log);
+        public void AddLog(Logs b);
     }
 }
