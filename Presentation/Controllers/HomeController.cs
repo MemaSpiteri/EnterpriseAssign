@@ -67,16 +67,15 @@ namespace Presentation.Controllers
                         Logs _logger = new Logs();
                         _logger.DateSent = DateTime.Now;
 
-                        //1. to generate a new unique filename
+                       
                         string newFilename = Guid.NewGuid() + Path.GetExtension(file.FileName);
                         _logger.YourEmail = model.YourEmail;
                         _logger.FileName = newFilename;
 
                         string absolutePath = hostEnv.ContentRootPath + "\\Files";
-
                         string absolutePathWithFilename = absolutePath + "\\" + newFilename;
                         model.File = "\\Files\\" + newFilename;
-                        //3. do the transfer/saving of the actual physical file
+                       
                         _logger.FileLoc = model.File;
 
                         using (FileStream fs = new FileStream(absolutePathWithFilename, FileMode.CreateNew, FileAccess.Write))
@@ -84,10 +83,20 @@ namespace Presentation.Controllers
                             file.CopyTo(fs);
                             fs.Close();
                         }
+
+                        //wwwroot
+                        string absolutePathRoot = hostEnv.WebRootPath + "\\Files";
+                        string absolutePathWithFilenameRoot = absolutePathRoot + "\\" + newFilename;
+
+                        using (FileStream fs = new FileStream(absolutePathWithFilenameRoot, FileMode.CreateNew, FileAccess.Write))
+                        {
+                            file.CopyTo(fs);
+                            fs.Close();
+                        }
                         _logger.FileSize = file.Length;
 
                         //creates a link for the file upload
-                        model.Link = "localhost:44329/" + model.File;
+                        model.Link = "localhost:44329" + model.File;
                         _logger.EmailTo = model.EmailTo;
                         fileTransfService.AddFile(model);
                         LogInDbService.AddLog(_logger);
@@ -101,6 +110,5 @@ namespace Presentation.Controllers
             }
             return View();
         }
-
     }
 }
