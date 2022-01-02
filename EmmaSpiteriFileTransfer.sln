@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{0ED13D0D-2908-4117-BCF7-05EDEA408372}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{0ED13D0D-2908-4117-BCF7-05EDEA408372}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{2C3347AF-E760-4900-8CA3-C041D87F9A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{2C3347AF-E760-4900-8CA3-C041D87F9A69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{EA4292D4-597F-4D13-BC4E-FA0AFBF882E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{EA4292D4-597F-4D13-BC4E-FA0AFBF882E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{39780171-4601-484E-BDB0-761854E1589C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{39780171-4601-484E-BDB0-761854E1589C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Links-Doc", "Links-Doc", "{FCB13B0E-BB39-4674-A0EC-BD8CDAC6FBBC}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\OneDrive\Desktop\SWD6.2B-EmmaSpiteriAssign.docx = ..\..\..\OneDrive\Desktop\SWD6.2B-EmmaSpiteriAssign.docx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
