@@ -11,11 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{39780171-4601-484E-BDB0-761854E1589C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Links-Doc", "Links-Doc", "{FCB13B0E-BB39-4674-A0EC-BD8CDAC6FBBC}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\OneDrive\Desktop\SWD6.2B-EmmaSpiteriAssign.docx = ..\..\..\OneDrive\Desktop\SWD6.2B-EmmaSpiteriAssign.docx
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
